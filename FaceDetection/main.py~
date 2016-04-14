@@ -1,0 +1,22 @@
+from SimpleCV.base import *
+from SimpleCV.Camera import *
+from SimpleCV.Color import *
+from SimpleCV.Display import *
+from SimpleCV.Features import *
+from SimpleCV.ImageClass import *
+from SimpleCV.Stream import *
+from SimpleCV.Font import *
+from SimpleCV.ColorModel import *
+from SimpleCV.DrawingLayer import *
+from SimpleCV.Segmentation import *
+from SimpleCV.MachineLearning import *
+
+img = Image("image.png")
+faces = img.findHaarFeatures("face.xml")
+
+#print locations
+for f in faces:
+	print "I found a face at " + str(f.coordinates())
+	img.dl().centeredRectangle(f.coordinates(), (200,200), color=Color.BLUE)
+img.show()
+raw_input()

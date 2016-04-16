@@ -29,7 +29,7 @@ raw_input()
 '''
 def drawSunglasses(img, coordinates):
     imgLayer = DrawingLayer((img.width, img.height))
-    imgLayer.ellipse(coordinates, (100, 50), color=Color.RED)
+    imgLayer.circle(coordinates, 100)
     img.addDrawingLayer(imgLayer)
     img.applyLayers()
 cam = Camera()
@@ -41,6 +41,6 @@ while True:
     	print "I found a face at " + str(f.coordinates())
     	#draw box around faces
     	img.dl().centeredRectangle(f.coordinates(), (200,200), color=Color.BLUE)
-        drawSunglasses(img, f.coordinates()[0], f.coordinates[1])
+        drawSunglasses(img, f.coordinates())
     #show image
     img.show()

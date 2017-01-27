@@ -4,7 +4,7 @@ cam = Camera()
 display = Display()
 
 # load the cascades
-stache = Image("stache.png", sample=True) # load the stache
+monacle = Image("monacle.png", sample=True) # load the stache
 mask = stache.createAlphaMask().invert() # load the stache mask
 
 while display.isNotDone():
@@ -14,20 +14,20 @@ while display.isNotDone():
         faces.sortArea() #get the biggest one
         face = faces[-1] #last element
         myFace = face.crop() # get the face image
-        noses = myFace.findHaarFeatures("nose.xml") #find the nose
-        if noses:# if we have a nose
-          noses.sortArea()
-          nose = noses[-1] # get the biggest
-          # these get the upper left corner of the face/nose with respect to original image
-          xf = face.x -(face.width()/2)
-          yf = face.y -(face.height()/2)
-          xm = nose.x -(nose.width()/2)
-          ym = nose.y -(nose.height()/2)
-          #calculate the mustache position
-          xmust = xf+xm-(stache.width/2)+(nose.width()/2)
-          ymust = yf+ym+(2*nose.height()/3)
-          #blit the stache/mask onto the image
-          img = img.blit(stache, pos=(xmust,ymust), mask = mask)
+        eyes = myFace.findHaarFeatures('lefteye.xml') #find the eye
+        if eyes:
+            eyes.sortArea()
+            eye = eyes[-1]
+            # these get the upper left corner of the face/nose with respect to original image
+            xf = face.x - (face.width()/2)
+            yf = face.y -(face.height()/2)
+            xe = eye.x - (eye.width()/2)
+            ye = eye.y - (eye.height()/2)
+            #calculate the monacle position
+            xmust = xf+xe-(monacle.width/2)+(eye.width()/2)
+            ymust = yf+ye #+(2*nose.height()/3)
+            #blit the stache/mask onto the image
+            img = img.blit(monacle, pos=(xmust,ymust), mask = mask)
 
 img.save(display) #display
 
